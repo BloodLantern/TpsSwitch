@@ -1,0 +1,22 @@
+{
+	"FileVersion": 3,
+	"EngineAssociation": "{7B7D68B0-4461-34BD-A02A-7890AFD44FE8}",
+	"Category": "",
+	"Description": "",
+	"Modules": [
+		{
+			"Name": "TPS_Switch1",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	],
+	"Plugins": [
+		{
+			"Name": "ModelingToolsEditorMode",
+			"Enabled": true,
+			"TargetAllowList": [
+				"Editor"
+			]
+		}
+	]
+}
