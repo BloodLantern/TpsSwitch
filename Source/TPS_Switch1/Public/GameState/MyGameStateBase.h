@@ -13,7 +13,5 @@ UCLASS()
 class TPS_SWITCH1_API AMyGameStateBase : public AGameStateBase
 {
 	GENERATED_BODY()
-public:
-	UFUNCTION(BlueprintCallable)
-	void SpawnObstacle(FString BPpath, FVector position, FRotator rotation);
+
 };

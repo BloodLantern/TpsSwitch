@@ -6,6 +6,8 @@
 #include "PlayerBase.h"
 #include "PlayerJotaro.generated.h"
 
+class APlayerStarPlatinum;
+
 /**
  * 
  */
