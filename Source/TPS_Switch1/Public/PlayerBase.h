@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "InputMappingContext.h"
+#include "EntityData.h"
 #include "PlayerBase.generated.h"
 
 UCLASS()
@@ -15,6 +16,10 @@ class TPS_SWITCH1_API APlayerBase : public ACharacter
 public:
 	// Sets default values for this character's properties
 	APlayerBase();
+	~APlayerBase() noexcept;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Entity)
+	FEntityData EntityData;
 
 protected:
 	// Called when the game starts or when spawned

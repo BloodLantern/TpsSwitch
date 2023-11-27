@@ -2,7 +2,16 @@
 
 #include "Obstacle.h"
 #include "Obstacles/Chair.h"
+#include "HAL/UnrealMemory.h"
 
+AObstacle::AObstacle()
+{
+}
 
+AObstacle::~AObstacle()
+{
+}
 
-
+void AObstacle::BeginPlay()
+{
+}

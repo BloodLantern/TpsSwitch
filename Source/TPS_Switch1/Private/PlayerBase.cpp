@@ -3,13 +3,17 @@
 
 #include "PlayerBase.h"
 #include "EnhancedInputSubsystems.h"
+#include "HAL/UnrealMemory.h"
 
 // Sets default values
 APlayerBase::APlayerBase()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+}
 
+APlayerBase::~APlayerBase() noexcept
+{
 }
 
 // Called when the game starts or when spawned
