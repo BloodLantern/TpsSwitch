@@ -13,5 +13,11 @@ UCLASS()
 class TPS_SWITCH1_API AObstacle : public AEntityBase
 {
 	GENERATED_BODY()
-	
+public:
+	AObstacle() {};
+	UPROPERTY(Category = Gameplay, EditAnywhere, BlueprintReadWrite)
+	int HP;
+	UPROPERTY(Category = Gameplay, EditAnywhere, BlueprintReadWrite)
+	float Speed;
+
 };
