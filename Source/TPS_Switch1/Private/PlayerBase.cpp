@@ -2,6 +2,7 @@
 
 
 #include "PlayerBase.h"
+#include "EnhancedInputSubsystems.h"
 
 // Sets default values
 APlayerBase::APlayerBase()
@@ -16,6 +17,12 @@ void APlayerBase::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	if (APlayerController* playerController = Cast<APlayerController>(GetController()))
+	{
+		//Input mapping 
+		if (UEnhancedInputLocalPlayerSubsystem* subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(playerController->GetLocalPlayer()))
+			subsystem->AddMappingContext(MappingContext, 0);
+	}
 }
 
 // Called every frame

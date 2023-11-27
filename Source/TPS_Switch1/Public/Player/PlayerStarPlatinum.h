@@ -13,5 +13,8 @@ UCLASS()
 class TPS_SWITCH1_API APlayerStarPlatinum : public APlayerBase
 {
 	GENERATED_BODY()
-	
+
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Player)
+	APlayerJotaro* StarPlatinum;
 };
