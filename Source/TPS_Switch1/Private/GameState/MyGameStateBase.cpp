@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "../../Public/Obstacles/Chair.h"
 #include "GameState/MyGameStateBase.h"
+#include "../../Public/Obstacles/Chair.h"
 
 void AMyGameStateBase::SpawnObstacle(FString BPpath, FVector position, FRotator rotation)
 {

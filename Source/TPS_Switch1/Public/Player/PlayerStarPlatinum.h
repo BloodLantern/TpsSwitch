@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "PlayerBase.h"
+#include "Player/PlayerJotaro.h"
 #include "PlayerStarPlatinum.generated.h"
 
 /**

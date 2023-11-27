@@ -2,4 +2,5 @@
 
 
 #include "Player/PlayerJotaro.h"
+#include "Player/PlayerStarPlatinum.h"
 
