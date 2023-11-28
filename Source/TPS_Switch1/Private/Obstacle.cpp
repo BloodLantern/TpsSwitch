@@ -3,6 +3,8 @@
 #include "Obstacle.h"
 #include "Obstacles/Chair.h"
 #include "HAL/UnrealMemory.h"
+#include "Components/PrimitiveComponent.h"
+#include "Components/StaticMeshComponent.h" 
 
 AObstacle::AObstacle()
 {
@@ -29,7 +31,7 @@ void AObstacle::SetMaterial(UMaterialInterface* material)
 {
     if (UStaticMeshComponent* ObstacleMesh = FindComponentByClass<UStaticMeshComponent>())
     {
-        int32 NumMaterials = ObstacleMesh->GetNumMaterials();
+        const int32 NumMaterials = ObstacleMesh->GetNumMaterials();
         for (int32 MaterialIndex = 0; MaterialIndex < NumMaterials; ++MaterialIndex)
         {
             ObstacleMesh->SetMaterial(MaterialIndex, material);
@@ -40,12 +42,24 @@ void AObstacle::SetMaterial(UMaterialInterface* material)
 
 void AObstacle::Tumble()
 {
-    FQuat QuatRotation = FQuat(TumbleRotation);
+    UStaticMeshComponent* MyStaticMeshComponent = FindComponentByClass<UStaticMeshComponent>();
 
-    AddActorLocalRotation(QuatRotation, false, 0, ETeleportType::None);
+    if (MyStaticMeshComponent && MyStaticMeshComponent->IsSimulatingPhysics())
+    {
+        
+        float Pitch = FMath::DegreesToRadians(TumbleRotation.Pitch);
+        float Yaw = FMath::DegreesToRadians(TumbleRotation.Yaw);
+        float Roll = FMath::DegreesToRadians(TumbleRotation.Roll);
+
+        FVector Torque = FVector(Pitch, Yaw, Roll);
+        MyStaticMeshComponent->AddTorqueInRadians(FVector(100000, 100000, 100000));
+        //should cap rotation speed as its a force that we add
+
+    }
+
 }
 
 FRotator AObstacle::GenerateTumbleRotation()
 {
-    return  FRotator(float(FMath::RandRange(0, 100)) / 100 * TumbleRotationSpeed, float(FMath::RandRange(0, 100)) / 100 * TumbleRotationSpeed, float(FMath::RandRange(0, 100)) / 100 * TumbleRotationSpeed);
+    return FRotator(1 * TumbleRotationSpeed, 1 * TumbleRotationSpeed, 1 * TumbleRotationSpeed);
 }
