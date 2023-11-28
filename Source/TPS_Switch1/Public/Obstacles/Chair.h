@@ -14,5 +14,4 @@ class TPS_SWITCH1_API AChair : public AObstacle
 {
 	GENERATED_BODY()
 	AChair() {};
-
 };

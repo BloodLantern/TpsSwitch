@@ -22,8 +22,11 @@ public:
 	UPROPERTY(Category = Gameplay, EditAnywhere, BlueprintReadWrite)
 	float Speed;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Entity)
+	UPROPERTY(Category = Gameplay, EditAnywhere, BlueprintReadWrite)
 	FEntityData EntityData;
+
+	UFUNCTION(BlueprintCallable)
+	void SetMaterial(UMaterialInterface* material);
 
 protected:
 	virtual void BeginPlay() override;
