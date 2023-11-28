@@ -6,6 +6,7 @@
 
 AObstacle::AObstacle()
 {
+    PrimaryActorTick.bCanEverTick = true;
 }
 
 AObstacle::~AObstacle()
@@ -14,6 +15,14 @@ AObstacle::~AObstacle()
 
 void AObstacle::BeginPlay()
 {
+    Super::BeginPlay();
+    TumbleRotation = GenerateTumbleRotation();
+}
+
+void AObstacle::Tick(float DeltaTime)
+{
+    Super::Tick(DeltaTime);
+    Tumble();
 }
 
 void AObstacle::SetMaterial(UMaterialInterface* material)
@@ -26,9 +35,17 @@ void AObstacle::SetMaterial(UMaterialInterface* material)
             ObstacleMesh->SetMaterial(MaterialIndex, material);
         }
     }
-    else
-    {
-        UE_LOG(LogTemp, Warning, TEXT("Obstacle mesh component not found in AObstacle"));
-    }
     EntityData.Color = material;
+}
+
+void AObstacle::Tumble()
+{
+    FQuat QuatRotation = FQuat(TumbleRotation);
+
+    AddActorLocalRotation(QuatRotation, false, 0, ETeleportType::None);
+}
+
+FRotator AObstacle::GenerateTumbleRotation()
+{
+    return  FRotator(float(FMath::RandRange(0, 100)) / 100 * TumbleRotationSpeed, float(FMath::RandRange(0, 100)) / 100 * TumbleRotationSpeed, float(FMath::RandRange(0, 100)) / 100 * TumbleRotationSpeed);
 }
