@@ -16,25 +16,35 @@ void AJojoPlayerController::SetupInputComponent()
 {
 	Super::SetupInputComponent();
 
-	InputComponent->BindAction("Aim", IE_Pressed, this, &ThisClass::InputAimPressed);
-	InputComponent->BindAction("Aim", IE_Released, this, &ThisClass::InputAimReleased);
-
 	if (UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(InputComponent))
 	{
-		/*EnhancedInputComponent->BindAction(CameraAction, ETriggerEvent::Triggered, this, &ThisClass::MoveCamera);
-		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ThisClass::MovePlayer);
-		EnhancedInputComponent->BindAction(AttackAction, ETriggerEvent::Started, this, &ThisClass::Attack);
-		EnhancedInputComponent->BindAction(BlockAction, ETriggerEvent::Triggered, this, &ThisClass::BlockTriggered);
-		EnhancedInputComponent->BindAction(LockAction, ETriggerEvent::Started, this, &ThisClass::Lock);*/
+		EnhancedInputComponent->BindAction(CameraAction, ETriggerEvent::Triggered, this, &ThisClass::InputCamera);
+		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ThisClass::InputMove);
+		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Triggered, this, &ThisClass::InputJump);
+		EnhancedInputComponent->BindAction(SlideAction, ETriggerEvent::Triggered, this, &ThisClass::InputSlide);
+		EnhancedInputComponent->BindAction(AimAction, ETriggerEvent::Triggered, this, &ThisClass::InputAim);
 	}
 }
 
-void AJojoPlayerController::InputAimPressed()
+void AJojoPlayerController::InputCamera()
 {
-	StarPlatinum->OnInputPressed();
+	// TODO
 }
 
-void AJojoPlayerController::InputAimReleased()
+void AJojoPlayerController::InputMove()
 {
-	StarPlatinum->OnInputReleased();
+	// TODO
+}
+
+void AJojoPlayerController::InputJump()
+{
+}
+
+void AJojoPlayerController::InputSlide()
+{
+}
+
+void AJojoPlayerController::InputAim()
+{
+	StarPlatinum->Aim();
 }

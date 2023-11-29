@@ -47,6 +47,9 @@ protected:
 	virtual void SetupInputComponent() override;
 
 private:
-	void InputAimPressed();
-	void InputAimReleased();
+	void InputCamera();
+	void InputMove();
+	void InputJump();
+	void InputSlide();
+	void InputAim();
 };

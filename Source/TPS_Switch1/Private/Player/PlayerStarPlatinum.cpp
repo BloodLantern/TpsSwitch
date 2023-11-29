@@ -8,30 +8,17 @@
 
 }*/
 
-void APlayerStarPlatinum::OnInputPressed()
+void APlayerStarPlatinum::Aim()
 {
     UParticleSystemComponent* OraAura = GetComponentByClass<UParticleSystemComponent>();
+
+    ShouldPunch = !ShouldPunch;
+    ShouldAim = !ShouldAim;
     
     if (OraAura)
     {
-        OraAura->SetActive(true, false);
+        OraAura->SetActive(ShouldAim, false);
     }
-
-    ShouldPunch = false;
-    ShouldAim = true;
-}
-
-void APlayerStarPlatinum::OnInputReleased()
-{
-    UParticleSystemComponent* OraAura = GetComponentByClass<UParticleSystemComponent>();
-
-    if (OraAura)
-    {
-        OraAura->SetActive(false, true);
-    }
-
-    ShouldAim = false;
-    ShouldPunch = true;
 }
 
 

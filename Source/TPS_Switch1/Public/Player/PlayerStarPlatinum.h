@@ -28,16 +28,13 @@ public:
 	USkeletalMeshComponent* StarBody = GetComponentByClass<USkeletalMeshComponent>();
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	bool ShouldAim;
+	bool ShouldAim = false;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	bool ShouldPunch;
+	bool ShouldPunch = true;
 
 	UFUNCTION(BlueprintCallable)
-	void OnInputPressed();
-
-	UFUNCTION(BlueprintCallable)
-	void OnInputReleased();
+	void Aim();
 
 	void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent);
 	APlayerStarPlatinum();

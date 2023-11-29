@@ -19,8 +19,8 @@ void AObstacle::BeginPlay()
 {
     Super::BeginPlay();
     Mesh = FindComponentByClass<UStaticMeshComponent>();
-
-    TorqueCoefficient = 500000000;
+    m_TorqueCoefficient = 50000;
+    m_RandomPrecision = 100;
     TumbleRotation = GenerateTumbleRotation();
     Tumble();
 }
@@ -29,7 +29,9 @@ void AObstacle::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
     ApplyFallSpeed();
+    FocusPlayer();
 }
+
 
 void AObstacle::SetMaterial(UMaterialInterface* material)
 {
@@ -49,20 +51,19 @@ void AObstacle::Tumble()
 
     if (Mesh && Mesh->IsSimulatingPhysics())
     {
-        
+
         const float Pitch = FMath::DegreesToRadians(TumbleRotation.Pitch);
         const float Yaw = FMath::DegreesToRadians(TumbleRotation.Yaw);
         const float Roll = FMath::DegreesToRadians(TumbleRotation.Roll);
 
         const FVector Torque = FVector(Pitch, Yaw, Roll);
-        Mesh->AddTorqueInRadians(Torque * TorqueCoefficient);
+        Mesh->AddTorqueInRadians(Torque * m_TorqueCoefficient, NAME_None, true);
     }
-
 }
 
 FRotator AObstacle::GenerateTumbleRotation()
 {
-    return FRotator((FMath::RandRange(0, 100) / 100.f ) * TumbleRotationSpeed, (FMath::RandRange(0, 100) / 100.f) * TumbleRotationSpeed, (FMath::RandRange(0, 100) / 100.f) * TumbleRotationSpeed);
+    return FRotator((FMath::RandRange(0, m_RandomPrecision) / float(m_RandomPrecision)) * TumbleRotationSpeed, (FMath::RandRange(0, m_RandomPrecision) / float(m_RandomPrecision)) * TumbleRotationSpeed, (FMath::RandRange(0, m_RandomPrecision) / float(m_RandomPrecision)) * TumbleRotationSpeed);
 }
 
 void AObstacle::ApplyFallSpeed()
@@ -74,21 +75,26 @@ void AObstacle::ApplyFallSpeed()
     {
         if (Mesh)
         {
-            FVector FloatyForce = FVector(0.0f, 0.0f, 1.0f) * 1 / Speed;
-            Mesh->AddForce(FloatyForce);
+            FVector FloatyForce = FVector::UpVector * 1 / Speed;
+            Mesh->AddForce(FloatyForce, NAME_None, true);
         }
     }
     else
     {
         if (Mesh)
         {
-            FVector FasterFallForce = FVector(0.0f, 0.0f, -1.0f) * Speed;
-            Mesh->AddForce(FasterFallForce);
+            FVector FasterFallForce = FVector::DownVector * Speed;
+            Mesh->AddForce(FasterFallForce, NAME_None, true);
         }
     }
 }
 
 void AObstacle::FocusPlayer()
 {
-    //Mesh->Move
+    FVector DirectionToPlayer = (GetWorld()->GetFirstPlayerController()->GetPawn()->GetActorLocation() - GetActorLocation().GetSafeNormal());
+    float DistanceToPlayer = FVector::Dist(GetWorld()->GetFirstPlayerController()->GetPawn()->GetActorLocation(), GetActorLocation());
+    float MaxForce = 1000.0f;
+    float ForceMagnitude = FMath::Clamp(MaxForce / DistanceToPlayer, 0.0f, MaxForce);
+    FVector Force = DirectionToPlayer * ForceMagnitude;
+    Mesh->AddForce(Force, NAME_None, true);
 }

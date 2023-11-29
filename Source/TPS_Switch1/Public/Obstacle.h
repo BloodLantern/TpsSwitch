@@ -29,7 +29,6 @@ public:
 	FEntityData EntityData;
 
 	FRotator TumbleRotation;
-	bool Landed;
 
 	UFUNCTION(BlueprintCallable)
 	void SetMaterial(UMaterialInterface* material);
@@ -37,12 +36,13 @@ public:
 	FRotator GenerateTumbleRotation();
 	void ApplyFallSpeed();
 	void FocusPlayer();
+	float CalculateFallSpeed();
 
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	virtual void BeginPlay() override;
 private:
-	int TorqueCoefficient;
-	float GravityScaleFactor;
+	int m_TorqueCoefficient;
+	int m_RandomPrecision;
 };
