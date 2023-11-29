@@ -3,8 +3,3 @@
 FEntityData::FEntityData()
 {
 }
-
-void FEntityData::BeginPlay()
-{
-}
-

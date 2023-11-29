@@ -17,6 +17,11 @@ class TPS_SWITCH1_API APlayerJotaro : public APlayerBase
 	GENERATED_BODY()
 	
 public:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Player)
+	APlayerJotaro();
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Player)
 	APlayerStarPlatinum* StarPlatinum;
+
+protected:
+	virtual void BeginPlay() override;
 };
