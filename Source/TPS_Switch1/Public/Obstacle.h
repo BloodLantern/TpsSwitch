@@ -17,6 +17,8 @@ public:
 	AObstacle();
 	~AObstacle() noexcept;
 
+	UStaticMeshComponent* Mesh;
+
 	UPROPERTY(Category = Gameplay, EditAnywhere, BlueprintReadWrite)
 	int HP;
 	UPROPERTY(Category = Gameplay, EditAnywhere, BlueprintReadWrite)
@@ -33,9 +35,14 @@ public:
 	void SetMaterial(UMaterialInterface* material);
 	void Tumble();
 	FRotator GenerateTumbleRotation();
+	void ApplyFallSpeed();
+	void FocusPlayer();
+
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	virtual void BeginPlay() override;
-
+private:
+	int TorqueCoefficient;
+	float GravityScaleFactor;
 };

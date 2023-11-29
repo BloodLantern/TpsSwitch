@@ -18,23 +18,27 @@ AObstacle::~AObstacle()
 void AObstacle::BeginPlay()
 {
     Super::BeginPlay();
+    Mesh = FindComponentByClass<UStaticMeshComponent>();
+
+    TorqueCoefficient = 500000000;
     TumbleRotation = GenerateTumbleRotation();
+    Tumble();
 }
 
 void AObstacle::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
-    Tumble();
+    ApplyFallSpeed();
 }
 
 void AObstacle::SetMaterial(UMaterialInterface* material)
 {
-    if (UStaticMeshComponent* ObstacleMesh = FindComponentByClass<UStaticMeshComponent>())
+    if (Mesh)
     {
-        const int32 NumMaterials = ObstacleMesh->GetNumMaterials();
+        const int32 NumMaterials = Mesh->GetNumMaterials();
         for (int32 MaterialIndex = 0; MaterialIndex < NumMaterials; ++MaterialIndex)
         {
-            ObstacleMesh->SetMaterial(MaterialIndex, material);
+            Mesh->SetMaterial(MaterialIndex, material);
         }
     }
     EntityData.Color = material;
@@ -42,24 +46,49 @@ void AObstacle::SetMaterial(UMaterialInterface* material)
 
 void AObstacle::Tumble()
 {
-    UStaticMeshComponent* MyStaticMeshComponent = FindComponentByClass<UStaticMeshComponent>();
 
-    if (MyStaticMeshComponent && MyStaticMeshComponent->IsSimulatingPhysics())
+    if (Mesh && Mesh->IsSimulatingPhysics())
     {
         
-        float Pitch = FMath::DegreesToRadians(TumbleRotation.Pitch);
-        float Yaw = FMath::DegreesToRadians(TumbleRotation.Yaw);
-        float Roll = FMath::DegreesToRadians(TumbleRotation.Roll);
+        const float Pitch = FMath::DegreesToRadians(TumbleRotation.Pitch);
+        const float Yaw = FMath::DegreesToRadians(TumbleRotation.Yaw);
+        const float Roll = FMath::DegreesToRadians(TumbleRotation.Roll);
 
-        FVector Torque = FVector(Pitch, Yaw, Roll);
-        MyStaticMeshComponent->AddTorqueInRadians(FVector(100000, 100000, 100000));
-        //should cap rotation speed as its a force that we add
-
+        const FVector Torque = FVector(Pitch, Yaw, Roll);
+        Mesh->AddTorqueInRadians(Torque * TorqueCoefficient);
     }
 
 }
 
 FRotator AObstacle::GenerateTumbleRotation()
 {
-    return FRotator(1 * TumbleRotationSpeed, 1 * TumbleRotationSpeed, 1 * TumbleRotationSpeed);
+    return FRotator((FMath::RandRange(0, 100) / 100.f ) * TumbleRotationSpeed, (FMath::RandRange(0, 100) / 100.f) * TumbleRotationSpeed, (FMath::RandRange(0, 100) / 100.f) * TumbleRotationSpeed);
+}
+
+void AObstacle::ApplyFallSpeed()
+{
+    if (Speed == 1.0f)
+    {
+    }
+    else if (Speed < 1.0f)
+    {
+        if (Mesh)
+        {
+            FVector FloatyForce = FVector(0.0f, 0.0f, 1.0f) * 1 / Speed;
+            Mesh->AddForce(FloatyForce);
+        }
+    }
+    else
+    {
+        if (Mesh)
+        {
+            FVector FasterFallForce = FVector(0.0f, 0.0f, -1.0f) * Speed;
+            Mesh->AddForce(FasterFallForce);
+        }
+    }
+}
+
+void AObstacle::FocusPlayer()
+{
+    Mesh->Move
 }
