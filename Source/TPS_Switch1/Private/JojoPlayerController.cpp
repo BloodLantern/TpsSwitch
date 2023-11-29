@@ -2,6 +2,7 @@
 
 
 #include "JojoPlayerController.h"
+#include <EnhancedInputComponent.h>
 
 void AJojoPlayerController::OnPossess(APawn* aPawn)
 {
@@ -17,6 +18,15 @@ void AJojoPlayerController::SetupInputComponent()
 
 	InputComponent->BindAction("Aim", IE_Pressed, this, &ThisClass::InputAimPressed);
 	InputComponent->BindAction("Aim", IE_Released, this, &ThisClass::InputAimReleased);
+
+	if (UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(InputComponent))
+	{
+		/*EnhancedInputComponent->BindAction(CameraAction, ETriggerEvent::Triggered, this, &ThisClass::MoveCamera);
+		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ThisClass::MovePlayer);
+		EnhancedInputComponent->BindAction(AttackAction, ETriggerEvent::Started, this, &ThisClass::Attack);
+		EnhancedInputComponent->BindAction(BlockAction, ETriggerEvent::Triggered, this, &ThisClass::BlockTriggered);
+		EnhancedInputComponent->BindAction(LockAction, ETriggerEvent::Started, this, &ThisClass::Lock);*/
+	}
 }
 
 void AJojoPlayerController::InputAimPressed()
