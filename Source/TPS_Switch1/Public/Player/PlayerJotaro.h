@@ -19,7 +19,7 @@ class TPS_SWITCH1_API APlayerJotaro : public APlayerBase
 public:
 	APlayerJotaro();
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Player)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Player)
 	APlayerStarPlatinum* StarPlatinum;
 
 protected:

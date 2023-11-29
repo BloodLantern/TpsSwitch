@@ -21,14 +21,21 @@ public:
 	int HP;
 	UPROPERTY(Category = Gameplay, EditAnywhere, BlueprintReadWrite)
 	float Speed;
-
+	UPROPERTY(Category = Gameplay, EditAnywhere, BlueprintReadWrite)
+	float TumbleRotationSpeed;
 	UPROPERTY(Category = Gameplay, EditAnywhere, BlueprintReadWrite)
 	FEntityData EntityData;
 
+	FRotator TumbleRotation;
+	bool Landed;
+
 	UFUNCTION(BlueprintCallable)
 	void SetMaterial(UMaterialInterface* material);
+	void Tumble();
+	FRotator GenerateTumbleRotation();
 
-protected:
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
 	virtual void BeginPlay() override;
 
 };

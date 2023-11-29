@@ -3,10 +3,6 @@
 
 #include "BaseGameMode.h"
 
-void ABaseGameMode::InitGame(const FString& MapName, const FString& Options, FString& ErrorMessage)
-{
-}
-
 UMaterialInterface* ABaseGameMode::GetPlayerColor(int PlayerId) const
 {
 	return PlayerColors[PlayerId];
