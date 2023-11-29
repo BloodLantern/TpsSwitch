@@ -40,4 +40,27 @@ public:
 	void OnInputReleased();
 
 	void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent);
+	APlayerStarPlatinum();
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = StarPlatinum)
+	FVector JotaroOffset = FVector(-50.0, -50.0, 50.0);
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = StarPlatinum)
+	float JotaroOffsetLerpSpeed = 5.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Player)
+	APlayerJotaro* Jotaro;
+
+protected:
+	virtual void BeginPlay() override;
+
+	virtual void Tick(float DeltaTime) override;
+
+public:
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void OnSpawned(APlayerJotaro* JotaroInstance);
+	virtual void OnSpawned_Implementation(APlayerJotaro* JotaroInstance);
+
+	UFUNCTION(BlueprintCallable)
+	void SwapPlayers();
 };

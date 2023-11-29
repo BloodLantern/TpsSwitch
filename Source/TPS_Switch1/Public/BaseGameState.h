@@ -3,15 +3,15 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/GameStateBase.h"
-#include "MyGameStateBase.generated.h"
+#include "GameFramework/GameState.h"
+#include "BaseGameState.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class TPS_SWITCH1_API AMyGameStateBase : public AGameStateBase
+class TPS_SWITCH1_API ABaseGameState : public AGameState
 {
 	GENERATED_BODY()
-
+	
 };

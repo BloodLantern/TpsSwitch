@@ -5,10 +5,10 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "InputMappingContext.h"
-#include "EntityData.h"
+#include "PlayerData.h"
 #include "PlayerBase.generated.h"
 
-UCLASS()
+UCLASS(Blueprintable, BlueprintType)
 class TPS_SWITCH1_API APlayerBase : public ACharacter
 {
 	GENERATED_BODY()
@@ -16,10 +16,9 @@ class TPS_SWITCH1_API APlayerBase : public ACharacter
 public:
 	// Sets default values for this character's properties
 	APlayerBase();
-	~APlayerBase() noexcept;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Entity)
-	FEntityData EntityData;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Player)
+	FPlayerData PlayerData;
 
 protected:
 	// Called when the game starts or when spawned

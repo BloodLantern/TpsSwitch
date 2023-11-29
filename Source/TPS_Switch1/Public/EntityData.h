@@ -11,6 +11,6 @@ struct TPS_SWITCH1_API FEntityData
 public:
 	FEntityData();
 
-	void BeginPlay();
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = EntityData)
 	UMaterialInterface* Color;
 };

@@ -90,5 +90,5 @@ void AObstacle::ApplyFallSpeed()
 
 void AObstacle::FocusPlayer()
 {
-    Mesh->Move
+    //Mesh->Move
 }
