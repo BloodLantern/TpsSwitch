@@ -39,8 +39,8 @@ void APlayerStarPlatinum::SetupPlayerInputComponent(UInputComponent* PlayerInput
 {
     Super::SetupPlayerInputComponent(PlayerInputComponent);
 
-    PlayerInputComponent->BindAction("Aim", IE_Pressed, this, &APlayerStarPlatinum::OnInputPressed);
-    PlayerInputComponent->BindAction("Aim", IE_Released, this, &APlayerStarPlatinum::OnInputReleased);
+    //PlayerInputComponent->BindAction("Aim", IE_Pressed, this, &APlayerStarPlatinum::OnInputPressed);
+    //PlayerInputComponent->BindAction("Aim", IE_Released, this, &APlayerStarPlatinum::OnInputReleased);
 }
 APlayerStarPlatinum::APlayerStarPlatinum()
 {
