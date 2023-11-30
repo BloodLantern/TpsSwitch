@@ -22,6 +22,14 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Player)
 	APlayerStarPlatinum* StarPlatinum;
 
+	UFUNCTION(BlueprintImplementableEvent)
+	void InputCamera(const FVector2D& Value);
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void InputMovement(const FVector2D& Value);
+
 protected:
 	virtual void BeginPlay() override;
+
+	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 };

@@ -36,7 +36,6 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void Aim();
 
-	void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent);
 	APlayerStarPlatinum();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = StarPlatinum)

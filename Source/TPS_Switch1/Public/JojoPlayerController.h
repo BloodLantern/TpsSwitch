@@ -40,6 +40,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
 	UInputAction* AimAction;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
+	UInputAction* SwapPlayersAction;
 	
 protected:
 	virtual void OnPossess(APawn* aPawn) override;
@@ -47,9 +50,10 @@ protected:
 	virtual void SetupInputComponent() override;
 
 private:
-	void InputCamera();
-	void InputMove();
+	void InputCamera(const FInputActionValue& Value);
+	void InputMovement(const FInputActionValue& Value);
 	void InputJump();
 	void InputSlide();
 	void InputAim();
+	void InputSwapPlayers();
 };

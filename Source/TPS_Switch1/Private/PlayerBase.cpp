@@ -19,13 +19,6 @@ void APlayerBase::BeginPlay()
 
     if (ABaseGameMode* gameMode = Cast<ABaseGameMode>(GetWorld()->GetAuthGameMode()))
         PlayerData.Color = gameMode->GetPlayerColor(PlayerData.PlayerId);
-    
-    if (APlayerController* playerController = Cast<APlayerController>(GetController()))
-    {
-        //Input mapping 
-        if (UEnhancedInputLocalPlayerSubsystem* subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(playerController->GetLocalPlayer()))
-            subsystem->AddMappingContext(MappingContext, 0);
-    }
 }
 
 // Called every frame
