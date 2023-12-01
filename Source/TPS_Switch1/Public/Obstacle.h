@@ -36,7 +36,6 @@ public:
 	FRotator GenerateTumbleRotation();
 	void ApplyFallSpeed();
 	void FocusPlayer();
-	float CalculateFallSpeed();
 
 
 	// Called every frame

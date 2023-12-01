@@ -17,7 +17,7 @@ public:
 	// Sets default values for this character's properties
 	APlayerBase();
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Player)
+	UPROPERTY(BlueprintReadWrite, Category = Player)
 	FPlayerData PlayerData;
 
 protected:
