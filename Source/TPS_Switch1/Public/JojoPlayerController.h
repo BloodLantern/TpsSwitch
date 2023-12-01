@@ -24,7 +24,7 @@ public:
 	APlayerStarPlatinum* StarPlatinum;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
-	UInputMappingContext* MappingContext;
+	TSoftObjectPtr<UInputMappingContext> MappingContext;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
 	UInputAction* CameraAction;
