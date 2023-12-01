@@ -18,7 +18,10 @@ class TPS_SWITCH1_API ABasePlatform : public AMechanism
 public:
 
 	UFUNCTION(BlueprintCallable)
+	void BeginHit(APlayerJotaro* player);
+	UFUNCTION(BlueprintCallable)
 	void OnHit(APlayerJotaro* player);
+	
 
 
 protected:
@@ -26,4 +29,5 @@ protected:
 
 private:
 	UStaticMeshComponent* m_Mesh;
+	
 };

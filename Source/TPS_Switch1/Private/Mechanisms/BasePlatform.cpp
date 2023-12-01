@@ -14,13 +14,18 @@ void ABasePlatform::BeginPlay()
 	m_Mesh = FindComponentByClass<UStaticMeshComponent>();
 }
 
-void ABasePlatform::OnHit(APlayerJotaro* player)
+void ABasePlatform::BeginHit(APlayerJotaro* player)
 {
 	if (EntityData.Color == player->PlayerData.Color)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, EntityData.Color->GetFName().ToString());
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, player->PlayerData.Color->GetFName().ToString());
-		m_Mesh->SetCollisionProfileName(TEXT("BlockAllDynamic"));
+		m_Mesh->SetCollisionProfileName(TEXT("BlockAll"));
 	}
 }
 
+void ABasePlatform::OnHit(APlayerJotaro* player)
+{
+	if (EntityData.Color != player->PlayerData.Color)
+	{
+		m_Mesh->SetCollisionProfileName(TEXT("OverlapAll"));
+	}
+}
