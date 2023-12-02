@@ -22,6 +22,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Player)
 	APlayerStarPlatinum* StarPlatinum;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
+	bool IsOnPlatform;
+
 	UFUNCTION(BlueprintImplementableEvent)
 	void InputCamera(const FVector2D& Value);
 

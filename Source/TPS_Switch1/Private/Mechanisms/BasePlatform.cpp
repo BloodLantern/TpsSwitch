@@ -14,6 +14,9 @@ void ABasePlatform::BeginPlay()
 	m_Mesh = FindComponentByClass<UStaticMeshComponent>();
 }
 
+
+
+
 void ABasePlatform::BeginHit(APlayerJotaro* player)
 {
 	if (EntityData.Color == player->PlayerData.Color)
@@ -24,8 +27,17 @@ void ABasePlatform::BeginHit(APlayerJotaro* player)
 
 void ABasePlatform::OnHit(APlayerJotaro* player)
 {
-	if (EntityData.Color != player->PlayerData.Color)
-	{
-		m_Mesh->SetCollisionProfileName(TEXT("OverlapAll"));
-	}
+	player->IsOnPlatform = true;
+}
+
+void ABasePlatform::OutBox(APlayerJotaro* player)
+{
+	player->IsOnPlatform = false;
+}
+
+void ABasePlatform::DisableCollision(APlayerJotaro* player)
+{
+	if (player->IsOnPlatform)
+		if (player->PlayerData.Color != EntityData.Color)
+			m_Mesh->SetCollisionProfileName(TEXT("OverlapAll"));
 }

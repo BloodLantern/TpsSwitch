@@ -21,7 +21,11 @@ public:
 	void BeginHit(APlayerJotaro* player);
 	UFUNCTION(BlueprintCallable)
 	void OnHit(APlayerJotaro* player);
-	
+	UFUNCTION(BlueprintCallable)
+	void OutBox(APlayerJotaro* player);
+	UFUNCTION(BlueprintCallable)
+	void DisableCollision(APlayerJotaro* player);
+
 
 
 protected:
