@@ -15,7 +15,7 @@ AMechanism::AMechanism()
 void AMechanism::BeginPlay()
 {
 	Super::BeginPlay();
-	UStaticMeshComponent* Mesh = FindComponentByClass<UStaticMeshComponent>();
+	Mesh = FindComponentByClass<UStaticMeshComponent>();
 	EntityData.Color = Mesh->GetMaterial(0);
 }
 
