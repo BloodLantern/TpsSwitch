@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Mechanism.h"
+#include "Bullet.h"
 #include "Switch.generated.h"
 
 /**
@@ -30,7 +31,7 @@ public:
 	UStaticMeshComponent* DoorMesh;
 
 	UFUNCTION(BlueprintCallable)
-	void OnHit(UMaterialInterface* color);
+	void OnHit(UMaterialInterface* color, ABullet* bullet);
 
 	void MoveDoor(float DeltaTime);
 

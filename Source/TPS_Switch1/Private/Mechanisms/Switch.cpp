@@ -1,6 +1,5 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "Mechanisms/Switch.h"
 
 void ASwitch::BeginPlay()
@@ -19,12 +18,15 @@ void ASwitch::Tick(float DeltaTime)
 	}
 }
 
-void ASwitch::OnHit(UMaterialInterface* color)
+void ASwitch::OnHit(UMaterialInterface* color, ABullet* bullet)
 {
-	if (!IsOn)
+	if (bullet->EntityData.Color == EntityData.Color)
 	{
-		IsOn = true;
-		Mesh->SetMaterial(0, color);
+		if (!IsOn)
+		{
+			IsOn = true;
+			Mesh->SetMaterial(0, color);
+		}
 	}
 }
 
