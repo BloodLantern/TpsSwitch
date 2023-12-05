@@ -8,6 +8,16 @@ void ASwitch::BeginPlay()
 	Timer = TimeToReachPosition;
 }
 
+void ASwitch::ChooseMeshes(TArray<UStaticMeshComponent*> meshes)
+{
+	for (UStaticMeshComponent* mesh : meshes)
+	{
+		if (mesh->GetFName() == "Door")
+			DoorMesh = mesh;
+		else if (mesh->GetFName() == "Switch")
+			Mesh = mesh;
+	}
+}
 
 void ASwitch::Tick(float DeltaTime)
 {

@@ -11,17 +11,20 @@ UCLASS()
 class TPS_SWITCH1_API AMechanism : public AActor
 {
 	GENERATED_BODY()
-	
-public:	
+
+public:
 	// Sets default values for this actor's properties
 	AMechanism();
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = Mesh)
 	UStaticMeshComponent* Mesh;
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
+	virtual void ChooseMeshes(TArray<UStaticMeshComponent*> meshes);
+
+public:
 	UPROPERTY(Category = Gameplay, EditAnywhere, BlueprintReadWrite)
 	FEntityData EntityData;
 	// Called every frame

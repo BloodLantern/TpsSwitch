@@ -8,7 +8,7 @@
 #include "Switch.generated.h"
 
 /**
- * 
+ *
  */
 UCLASS()
 class TPS_SWITCH1_API ASwitch : public AMechanism
@@ -27,7 +27,7 @@ public:
 	UPROPERTY(Category = Gameplay, EditAnywhere, BlueprintReadWrite)
 	FVector AddedOffset;
 
-	UPROPERTY(Category = Mesh, EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(Category = Mesh, EditDefaultsOnly, BlueprintReadWrite)
 	UStaticMeshComponent* DoorMesh;
 
 	UFUNCTION(BlueprintCallable)
@@ -41,4 +41,6 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+	virtual void ChooseMeshes(TArray<UStaticMeshComponent*> meshes) override;
 };
