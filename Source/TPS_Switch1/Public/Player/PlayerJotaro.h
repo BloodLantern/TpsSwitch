@@ -25,6 +25,12 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
 	bool IsOnPlatform;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Animation)
+	bool ShouldJump;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Animation)
+	bool ShouldSlide;
+
 	UFUNCTION(BlueprintImplementableEvent)
 	void InputCamera(const FVector2D& Value);
 
