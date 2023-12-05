@@ -21,8 +21,10 @@ void AJojoPlayerController::SetupInputComponent()
 
 	EnhancedInputComponent->BindAction(CameraAction, ETriggerEvent::Triggered, this, &ThisClass::InputCamera);
 	EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ThisClass::InputMovement);
-	EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Triggered, this, &ThisClass::InputJump);
-	EnhancedInputComponent->BindAction(SlideAction, ETriggerEvent::Triggered, this, &ThisClass::InputSlide);
+	EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Triggered, this, &ThisClass::InputJumpBegin);
+	EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ThisClass::InputJumpEnd);
+	EnhancedInputComponent->BindAction(SlideAction, ETriggerEvent::Triggered, this, &ThisClass::InputSlideBegin);
+	EnhancedInputComponent->BindAction(SlideAction, ETriggerEvent::Completed, this, &ThisClass::InputSlideEnd);
 	EnhancedInputComponent->BindAction(AimAction, ETriggerEvent::Triggered, this, &ThisClass::InputAim);
 	EnhancedInputComponent->BindAction(SwapPlayersAction, ETriggerEvent::Triggered, this, &ThisClass::InputSwapPlayers);
 
@@ -46,12 +48,24 @@ void AJojoPlayerController::InputMovement(const FInputActionValue& Value)
 	Jotaro->InputMovement(Value.Get<FVector2D>());
 }
 
-void AJojoPlayerController::InputJump()
+void AJojoPlayerController::InputJumpBegin()
 {
+	Jotaro->ShouldJump = true;
 }
 
-void AJojoPlayerController::InputSlide()
+void AJojoPlayerController::InputJumpEnd()
 {
+	Jotaro->ShouldJump = false;
+}
+
+void AJojoPlayerController::InputSlideBegin()
+{
+	Jotaro->ShouldSlide = true;
+}
+
+void AJojoPlayerController::InputSlideEnd()
+{
+	Jotaro->ShouldSlide = false;
 }
 
 void AJojoPlayerController::InputAim()
