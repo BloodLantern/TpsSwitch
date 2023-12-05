@@ -52,8 +52,10 @@ protected:
 private:
 	void InputCamera(const FInputActionValue& Value);
 	void InputMovement(const FInputActionValue& Value);
-	void InputJump();
-	void InputSlide();
+	void InputJumpBegin();
+	void InputJumpEnd();
+	void InputSlideBegin();
+	void InputSlideEnd();
 	void InputAim();
 	void InputSwapPlayers();
 };

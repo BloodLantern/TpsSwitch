@@ -5,28 +5,28 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "EntityData.h"
-#include "Mechanism.generated.h"
+#include "Player/PlayerStarPlatinum.h"
+#include "Bullet.generated.h"
 
 UCLASS()
-class TPS_SWITCH1_API AMechanism : public AActor
+class TPS_SWITCH1_API ABullet : public AActor
 {
 	GENERATED_BODY()
-
-public:
+	
+public:	
 	// Sets default values for this actor's properties
-	AMechanism();
+	ABullet();
+	UPROPERTY(Category = Gameplay, EditAnywhere, BlueprintReadWrite)
+	FEntityData EntityData;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = Mesh)
-	UStaticMeshComponent* Mesh;
+	UFUNCTION(BlueprintCallable)
+	void SetColor(APlayerStarPlatinum* starPlatinum);
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	virtual void ChooseMeshes(TArray<UStaticMeshComponent*> meshes);
-
-public:
-	UPROPERTY(Category = Gameplay, EditAnywhere, BlueprintReadWrite)
-	FEntityData EntityData;
+public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 

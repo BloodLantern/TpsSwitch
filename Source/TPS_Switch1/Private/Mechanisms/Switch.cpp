@@ -1,6 +1,5 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "Mechanisms/Switch.h"
 
 void ASwitch::BeginPlay()
@@ -9,6 +8,16 @@ void ASwitch::BeginPlay()
 	Timer = TimeToReachPosition;
 }
 
+void ASwitch::ChooseMeshes(TArray<UStaticMeshComponent*> meshes)
+{
+	for (UStaticMeshComponent* mesh : meshes)
+	{
+		if (mesh->GetFName() == "Door")
+			DoorMesh = mesh;
+		else if (mesh->GetFName() == "Switch")
+			Mesh = mesh;
+	}
+}
 
 void ASwitch::Tick(float DeltaTime)
 {
@@ -19,12 +28,15 @@ void ASwitch::Tick(float DeltaTime)
 	}
 }
 
-void ASwitch::OnHit(UMaterialInterface* color)
+void ASwitch::OnHit(UMaterialInterface* color, ABullet* bullet)
 {
-	if (!IsOn)
+	if (bullet->EntityData.Color == EntityData.Color)
 	{
-		IsOn = true;
-		Mesh->SetMaterial(0, color);
+		if (!IsOn)
+		{
+			IsOn = true;
+			Mesh->SetMaterial(0, color);
+		}
 	}
 }
 

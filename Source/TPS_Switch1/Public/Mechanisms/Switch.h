@@ -4,10 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "Mechanism.h"
+#include "Bullet.h"
 #include "Switch.generated.h"
 
 /**
- * 
+ *
  */
 UCLASS()
 class TPS_SWITCH1_API ASwitch : public AMechanism
@@ -26,11 +27,11 @@ public:
 	UPROPERTY(Category = Gameplay, EditAnywhere, BlueprintReadWrite)
 	FVector AddedOffset;
 
-	UPROPERTY(Category = Mesh, EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(Category = Mesh, EditDefaultsOnly, BlueprintReadWrite)
 	UStaticMeshComponent* DoorMesh;
 
 	UFUNCTION(BlueprintCallable)
-	void OnHit(UMaterialInterface* color);
+	void OnHit(UMaterialInterface* color, ABullet* bullet);
 
 	void MoveDoor(float DeltaTime);
 
@@ -40,4 +41,6 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+	virtual void ChooseMeshes(TArray<UStaticMeshComponent*> meshes) override;
 };
