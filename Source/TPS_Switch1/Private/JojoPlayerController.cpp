@@ -5,6 +5,11 @@
 #include <EnhancedInputComponent.h>
 #include <EnhancedInputSubsystems.h>
 
+AJojoPlayerController::AJojoPlayerController()
+{
+	PlayerId = LastPlayerId++;
+}
+
 void AJojoPlayerController::OnPossess(APawn* aPawn)
 {
 	Super::OnPossess(aPawn);
@@ -40,40 +45,48 @@ void AJojoPlayerController::SetupInputComponent()
 
 void AJojoPlayerController::InputCamera(const FInputActionValue& Value)
 {
-	Jotaro->InputCamera(Value.Get<FVector2D>());
+	if (Jotaro->PlayerData.PlayerId == PlayerId)
+		Jotaro->InputCamera(Value.Get<FVector2D>());
 }
 
 void AJojoPlayerController::InputMovement(const FInputActionValue& Value)
 {
-	Jotaro->InputMovement(Value.Get<FVector2D>());
+	if (Jotaro->PlayerData.PlayerId == PlayerId)
+		Jotaro->InputMovement(Value.Get<FVector2D>());
 }
 
 void AJojoPlayerController::InputJumpBegin()
 {
-	Jotaro->ShouldJump = true;
+	if (Jotaro->PlayerData.PlayerId == PlayerId)
+		Jotaro->ShouldJump = true;
 }
 
 void AJojoPlayerController::InputJumpEnd()
 {
-	Jotaro->ShouldJump = false;
+	if (Jotaro->PlayerData.PlayerId == PlayerId)
+		Jotaro->ShouldJump = false;
 }
 
 void AJojoPlayerController::InputSlideBegin()
 {
-	Jotaro->ShouldSlide = true;
+	if (Jotaro->PlayerData.PlayerId == PlayerId)
+		Jotaro->ShouldSlide = true;
 }
 
 void AJojoPlayerController::InputSlideEnd()
 {
-	Jotaro->ShouldSlide = false;
+	if (Jotaro->PlayerData.PlayerId == PlayerId)
+		Jotaro->ShouldSlide = false;
 }
 
 void AJojoPlayerController::InputAim()
 {
-	StarPlatinum->Aim();
+	if (StarPlatinum->PlayerData.PlayerId == PlayerId)
+		StarPlatinum->Aim();
 }
 
 void AJojoPlayerController::InputSwapPlayers()
 {
-	StarPlatinum->SwapPlayers();
+	if (StarPlatinum->PlayerData.PlayerId == PlayerId)
+		StarPlatinum->SwapPlayers();
 }
