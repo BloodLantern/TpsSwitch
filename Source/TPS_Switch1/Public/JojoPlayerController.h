@@ -17,12 +17,8 @@ class TPS_SWITCH1_API AJojoPlayerController : public APlayerController
 	GENERATED_BODY()
 
 public:
-	AJojoPlayerController();
-
-	static inline int LastPlayerId = 0;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Player)
-	int PlayerId;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Player)
+	int PlayerId = 0;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Player)
 	APlayerJotaro* Jotaro;
