@@ -19,24 +19,19 @@ class TPS_SWITCH1_API APlayerStarPlatinum : public APlayerBase
 	GENERATED_BODY()
 
 public:
-	//virtual void BeginPlay() override;
+	APlayerStarPlatinum();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Player)
 	APlayerJotaro* StarPlatinum;
 
 	UPROPERTY(EditAnywhere)
-	USkeletalMeshComponent* StarBody = GetComponentByClass<USkeletalMeshComponent>();
+	USkeletalMeshComponent* StarBody;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	bool ShouldAim = false;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	bool ShouldPunch = true;
-
-	UFUNCTION(BlueprintCallable)
-	void Aim();
-
-	APlayerStarPlatinum();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = StarPlatinum)
 	FVector JotaroOffset = FVector(-50.0, -50.0, 50.0);
@@ -56,6 +51,12 @@ public:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void OnSpawned(APlayerJotaro* JotaroInstance);
 	virtual void OnSpawned_Implementation(APlayerJotaro* JotaroInstance);
+
+	UFUNCTION(BlueprintCallable)
+	void Aim();
+
+	UFUNCTION(BlueprintCallable)
+	void MoveCursor();
 
 	UFUNCTION(BlueprintCallable)
 	void SwapPlayers();

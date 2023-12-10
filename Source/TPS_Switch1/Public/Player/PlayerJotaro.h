@@ -32,13 +32,12 @@ public:
 	bool ShouldSlide;
 
 	UFUNCTION(BlueprintImplementableEvent)
-	void InputCamera(const FVector2D& Value);
+	APlayerStarPlatinum* InitializeStarPlatinum();
 
-	UFUNCTION(BlueprintImplementableEvent)
-	void InputMovement(const FVector2D& Value);
+	void InputMovement(float Value);
 
 protected:
 	virtual void BeginPlay() override;
 
-	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
+	virtual void Tick(float DeltaTime);
 };

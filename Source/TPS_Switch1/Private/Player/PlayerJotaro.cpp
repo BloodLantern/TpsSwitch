@@ -4,9 +4,15 @@
 #include "Player/PlayerJotaro.h"
 #include "Player/PlayerStarPlatinum.h"
 #include <JojoPlayerController.h>
+#include "Kismet/KismetMathLibrary.h"
 
 APlayerJotaro::APlayerJotaro()
 {
+}
+
+void APlayerJotaro::InputMovement(float Value)
+{
+	AddMovementInput(UKismetMathLibrary::GetRightVector(GetControlRotation()), Value);
 }
 
 void APlayerJotaro::BeginPlay()
@@ -16,9 +22,7 @@ void APlayerJotaro::BeginPlay()
 	Super::BeginPlay();
 }
 
-void APlayerJotaro::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+void APlayerJotaro::Tick(float DeltaTime)
 {
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
-	GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Yellow, FString::FromInt(PlayerInputComponent->IsA<AJojoPlayerController>()));
+	AddMovementInput(UKismetMathLibrary::GetForwardVector(GetControlRotation()), 1.f);
 }

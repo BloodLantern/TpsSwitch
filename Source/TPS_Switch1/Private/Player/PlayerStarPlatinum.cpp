@@ -3,24 +3,6 @@
 
 #include "Player/PlayerStarPlatinum.h"
 
-/*void APlayerStarPlatinum::BeginPlay()
-{
-
-}*/
-
-void APlayerStarPlatinum::Aim()
-{
-    UParticleSystemComponent* OraAura = GetComponentByClass<UParticleSystemComponent>();
-
-    ShouldPunch = !ShouldPunch;
-    ShouldAim = !ShouldAim;
-    
-    if (OraAura)
-    {
-        OraAura->SetActive(ShouldAim, false);
-    }
-}
-
 APlayerStarPlatinum::APlayerStarPlatinum()
 {
 }
@@ -28,6 +10,8 @@ APlayerStarPlatinum::APlayerStarPlatinum()
 void APlayerStarPlatinum::BeginPlay()
 {
 	PlayerData.PlayerId = 1;
+
+	StarBody = GetComponentByClass<USkeletalMeshComponent>();
 
 	Super::BeginPlay();
 }
@@ -45,6 +29,23 @@ void APlayerStarPlatinum::Tick(float DeltaTime)
 void APlayerStarPlatinum::OnSpawned_Implementation(APlayerJotaro* JotaroInstance)
 {
 	Jotaro = JotaroInstance;
+}
+
+void APlayerStarPlatinum::Aim()
+{
+	UParticleSystemComponent* OraAura = GetComponentByClass<UParticleSystemComponent>();
+
+	ShouldPunch = !ShouldPunch;
+	ShouldAim = !ShouldAim;
+
+	if (OraAura)
+	{
+		OraAura->SetActive(ShouldAim, false);
+	}
+}
+
+void APlayerStarPlatinum::MoveCursor()
+{
 }
 
 void APlayerStarPlatinum::SwapPlayers()

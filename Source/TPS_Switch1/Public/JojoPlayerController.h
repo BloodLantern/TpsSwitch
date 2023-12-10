@@ -30,9 +30,6 @@ public:
 	TSoftObjectPtr<UInputMappingContext> MappingContext;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
-	UInputAction* CameraAction;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
 	UInputAction* MoveAction;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
@@ -45,6 +42,9 @@ public:
 	UInputAction* AimAction;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
+	UInputAction* MoveCursorAction;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
 	UInputAction* SwapPlayersAction;
 	
 protected:
@@ -53,12 +53,12 @@ protected:
 	virtual void SetupInputComponent() override;
 
 private:
-	void InputCamera(const FInputActionValue& Value);
 	void InputMovement(const FInputActionValue& Value);
 	void InputJumpBegin();
 	void InputJumpEnd();
 	void InputSlideBegin();
 	void InputSlideEnd();
 	void InputAim();
+	void InputMoveCursor();
 	void InputSwapPlayers();
 };
