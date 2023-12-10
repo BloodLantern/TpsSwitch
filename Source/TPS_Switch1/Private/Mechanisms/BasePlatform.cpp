@@ -22,6 +22,7 @@ void ABasePlatform::BeginHit(APlayerJotaro* player)
 	if (EntityData.Color == player->PlayerData.Color)
 	{
 		m_Mesh->SetCollisionProfileName(TEXT("BlockAll"));
+		player->IsOnPlatform = true;
 	}
 }
 
