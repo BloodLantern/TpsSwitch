@@ -92,6 +92,8 @@ void AJojoPlayerController::InputMoveCursor()
 
 void AJojoPlayerController::InputSwapPlayers()
 {
+#if !UE_EDITOR
 	if (StarPlatinum->PlayerData.PlayerId == PlayerId)
+#endif
 		StarPlatinum->SwapPlayers();
 }
