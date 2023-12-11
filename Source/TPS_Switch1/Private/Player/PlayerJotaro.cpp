@@ -5,6 +5,7 @@
 #include "Player/PlayerStarPlatinum.h"
 #include <JojoPlayerController.h>
 #include "Kismet/KismetMathLibrary.h"
+#include "GameFramework/PawnMovementComponent.h"
 
 APlayerJotaro::APlayerJotaro()
 {
@@ -12,6 +13,7 @@ APlayerJotaro::APlayerJotaro()
 
 void APlayerJotaro::InputMovement(float Value)
 {
+	// Move horizontally
 	AddMovementInput(UKismetMathLibrary::GetRightVector(GetControlRotation()), Value);
 }
 
@@ -24,5 +26,6 @@ void APlayerJotaro::BeginPlay()
 
 void APlayerJotaro::Tick(float DeltaTime)
 {
+	// Always move forward
 	AddMovementInput(UKismetMathLibrary::GetForwardVector(GetControlRotation()), 1.f);
 }
