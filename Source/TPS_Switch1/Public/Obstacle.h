@@ -36,7 +36,8 @@ public:
 	FRotator GenerateTumbleRotation();
 	void ApplyFallSpeed();
 	void FocusPlayer();
-
+	UFUNCTION(BlueprintCallable)
+	void GetDamaged(int damage);
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

@@ -98,3 +98,12 @@ void AObstacle::FocusPlayer()
     FVector Force = DirectionToPlayer * ForceMagnitude;
     Mesh->AddForce(Force, NAME_None, true);
 }
+
+void AObstacle::GetDamaged(int damage)
+{
+    HP -= damage;
+    if (HP <= 0)
+    {
+        Destroy();
+    }
+}
