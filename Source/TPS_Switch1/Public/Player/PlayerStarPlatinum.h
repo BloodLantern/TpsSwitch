@@ -52,12 +52,15 @@ public:
 	void OnSpawned(APlayerJotaro* JotaroInstance);
 	virtual void OnSpawned_Implementation(APlayerJotaro* JotaroInstance);
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void Aim();
+	void Aim_Implementation();
 
-	UFUNCTION(BlueprintCallable)
-	void MoveCursor();
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void MoveCursor(FVector2D Value);
+	void MoveCursor_Implementation(FVector2D Value);
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void SwapPlayers();
+	void SwapPlayers_Implementation();
 };

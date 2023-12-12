@@ -4,6 +4,14 @@
 #include "JojoPlayerController.h"
 #include <EnhancedInputComponent.h>
 #include <EnhancedInputSubsystems.h>
+#include <Kismet/GameplayStatics.h>
+
+void AJojoPlayerController::BeginPlay()
+{
+	Super::BeginPlay();
+
+	m_GameMode = Cast<ABaseGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
+}
 
 void AJojoPlayerController::OnPossess(APawn* aPawn)
 {
@@ -48,52 +56,57 @@ void AJojoPlayerController::SetupInputComponent()
 	}
 }
 
+bool AJojoPlayerController::CanUseInput(APlayerBase* PlayerCharacter)
+{
+	return PlayerCharacter->PlayerData.PlayerId == PlayerId && !m_GameMode->InMenus;
+}
+
 void AJojoPlayerController::InputMovement(const FInputActionValue& Value)
 {
-	if (Jotaro->PlayerData.PlayerId == PlayerId)
+	if (CanUseInput(Jotaro))
 		Jotaro->InputMovement(Value.Get<float>());
 }
 
 void AJojoPlayerController::InputJumpBegin()
 {
-	if (Jotaro->PlayerData.PlayerId == PlayerId)
+	if (CanUseInput(Jotaro))
 		Jotaro->ShouldJump = true;
 }
 
 void AJojoPlayerController::InputJumpEnd()
 {
-	if (Jotaro->PlayerData.PlayerId == PlayerId)
+	if (CanUseInput(Jotaro))
 		Jotaro->ShouldJump = false;
 }
 
 void AJojoPlayerController::InputSlideBegin()
 {
-	if (Jotaro->PlayerData.PlayerId == PlayerId)
+	if (CanUseInput(Jotaro))
 		Jotaro->ShouldSlide = true;
 }
 
 void AJojoPlayerController::InputSlideEnd()
 {
-	if (Jotaro->PlayerData.PlayerId == PlayerId)
+	if (CanUseInput(Jotaro))
 		Jotaro->ShouldSlide = false;
 }
 
 void AJojoPlayerController::InputAim()
 {
-	if (StarPlatinum->PlayerData.PlayerId == PlayerId)
+	if (CanUseInput(StarPlatinum))
 		StarPlatinum->Aim();
 }
 
-void AJojoPlayerController::InputMoveCursor()
+void AJojoPlayerController::InputMoveCursor(const FInputActionValue& Value)
 {
-	if (StarPlatinum->PlayerData.PlayerId == PlayerId)
-		StarPlatinum->Aim();
+	if (CanUseInput(StarPlatinum))
+		StarPlatinum->MoveCursor(Value.Get<FVector2D>());
 }
 
 void AJojoPlayerController::InputSwapPlayers()
 {
 #if !UE_EDITOR
-	if (StarPlatinum->PlayerData.PlayerId == PlayerId)
+	if (CanUseInput(StarPlatinum))
 #endif
 		StarPlatinum->SwapPlayers();
 }

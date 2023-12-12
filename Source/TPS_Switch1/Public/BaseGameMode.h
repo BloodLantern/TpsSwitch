@@ -28,6 +28,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Time)
 	FVector LastCheckpoint;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Input)
+	bool InMenus;
+
 private:
 	APlayerStarPlatinum* CreatePlayer1(FTransform Transform);
 	void CreatePlayer2(APlayerStarPlatinum* StarPlatinum);

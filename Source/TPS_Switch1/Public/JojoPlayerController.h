@@ -6,6 +6,7 @@
 #include "GameFramework/PlayerController.h"
 #include <Player/PlayerJotaro.h>
 #include <Player/PlayerStarPlatinum.h>
+#include "BaseGameMode.h"
 #include "JojoPlayerController.generated.h"
 
 /**
@@ -48,17 +49,23 @@ public:
 	UInputAction* SwapPlayersAction;
 	
 protected:
+	virtual void BeginPlay() override;
+
 	virtual void OnPossess(APawn* aPawn) override;
 
 	virtual void SetupInputComponent() override;
 
 private:
+	ABaseGameMode* m_GameMode;
+
+	bool CanUseInput(APlayerBase* PlayerCharacter);
+
 	void InputMovement(const FInputActionValue& Value);
 	void InputJumpBegin();
 	void InputJumpEnd();
 	void InputSlideBegin();
 	void InputSlideEnd();
 	void InputAim();
-	void InputMoveCursor();
+	void InputMoveCursor(const FInputActionValue& Value);
 	void InputSwapPlayers();
 };

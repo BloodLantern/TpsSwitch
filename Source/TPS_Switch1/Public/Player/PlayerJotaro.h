@@ -50,7 +50,7 @@ public:
 private:
 	ABaseGameMode* m_GameMode;
 
-	bool m_Dead;
+	bool m_Moving = true;
 
 protected:
 	virtual void BeginPlay() override;
@@ -61,7 +61,11 @@ protected:
 	void OnAnyDamage(AActor* DamagedActor, float Damage, const class UDamageType* DamageType, class AController* InstigatedBy, AActor* DamageCauser);
 	void OnAnyDamage_Implementation(AActor* DamagedActor, float Damage, const class UDamageType* DamageType, class AController* InstigatedBy, AActor* DamageCauser);
 
-	UFUNCTION(BlueprintNativeEvent)
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void OnDeath();
 	void OnDeath_Implementation();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void OnWin();
+	void OnWin_Implementation();
 };

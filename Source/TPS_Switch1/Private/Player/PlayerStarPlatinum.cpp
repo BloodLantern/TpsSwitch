@@ -31,7 +31,7 @@ void APlayerStarPlatinum::OnSpawned_Implementation(APlayerJotaro* JotaroInstance
 	Jotaro = JotaroInstance;
 }
 
-void APlayerStarPlatinum::Aim()
+void APlayerStarPlatinum::Aim_Implementation()
 {
 	UParticleSystemComponent* OraAura = GetComponentByClass<UParticleSystemComponent>();
 
@@ -44,11 +44,11 @@ void APlayerStarPlatinum::Aim()
 	}
 }
 
-void APlayerStarPlatinum::MoveCursor()
+void APlayerStarPlatinum::MoveCursor_Implementation(FVector2D Value)
 {
 }
 
-void APlayerStarPlatinum::SwapPlayers()
+void APlayerStarPlatinum::SwapPlayers_Implementation()
 {
 	FPlayerData thisData = PlayerData;
 	PlayerData = Jotaro->PlayerData;

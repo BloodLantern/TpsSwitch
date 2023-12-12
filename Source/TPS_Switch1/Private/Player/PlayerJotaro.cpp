@@ -34,8 +34,8 @@ void APlayerJotaro::BeginPlay()
 
 void APlayerJotaro::Tick(float DeltaTime)
 {
-	if (!m_Dead)
-		// Always move forward
+	// Always move forward
+	if (m_Moving)
 		AddMovementInput(UKismetMathLibrary::GetForwardVector(GetControlRotation()), 1.f);
 
 	if (GetActorLocation().Z <= DeathZ)
@@ -53,5 +53,10 @@ void APlayerJotaro::OnAnyDamage_Implementation(AActor* DamagedActor, float Damag
 
 void APlayerJotaro::OnDeath_Implementation()
 {
-	m_Dead = true;
+	m_Moving = false;
+}
+
+void APlayerJotaro::OnWin_Implementation()
+{
+	m_Moving = false;
 }
