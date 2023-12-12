@@ -23,6 +23,9 @@ APlayerStarPlatinum* ABaseGameMode::CreatePlayer1(FTransform Transform)
 void ABaseGameMode::CreatePlayer2(APlayerStarPlatinum* StarPlatinum)
 {
 	APlayerController* controller = UGameplayStatics::CreatePlayer(GetWorld(), 1);
+	// If player 2 already exists, get its player controller
+	if (!controller)
+		controller = UGameplayStatics::GetPlayerController(GetWorld(), 1);
 
 	AddMappingContext(controller);
 
