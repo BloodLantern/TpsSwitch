@@ -4,10 +4,14 @@
 #include "Player/PlayerJotaro.h"
 #include "Player/PlayerStarPlatinum.h"
 #include <JojoPlayerController.h>
+#include <BaseGameMode.h>
 #include "Kismet/KismetMathLibrary.h"
+#include "Kismet/GameplayStatics.h"
 #include "GameFramework/PawnMovementComponent.h"
+#include "Kismet/KismetSystemLibrary.h"
 
 APlayerJotaro::APlayerJotaro()
+	: Health(MaxHealth)
 {
 }
 
@@ -19,13 +23,35 @@ void APlayerJotaro::InputMovement(float Value)
 
 void APlayerJotaro::BeginPlay()
 {
+	Super::BeginPlay();
+
 	PlayerData.PlayerId = 0;
 
-	Super::BeginPlay();
+	m_GameMode = Cast<ABaseGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
+
+	OnTakeAnyDamage.AddDynamic(this, &ThisClass::OnAnyDamage);
 }
 
 void APlayerJotaro::Tick(float DeltaTime)
 {
-	// Always move forward
-	AddMovementInput(UKismetMathLibrary::GetForwardVector(GetControlRotation()), 1.f);
+	if (!m_Dead)
+		// Always move forward
+		AddMovementInput(UKismetMathLibrary::GetForwardVector(GetControlRotation()), 1.f);
+
+	if (GetActorLocation().Z <= DeathZ)
+		UGameplayStatics::ApplyDamage(this, 1.f, GetController(), this, nullptr);
+}
+
+void APlayerJotaro::OnAnyDamage_Implementation(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser)
+{
+	Health -= Damage;
+	SetActorLocation(m_GameMode->LastCheckpoint);
+
+	if (Health <= 0)
+		OnDeath();
+}
+
+void APlayerJotaro::OnDeath_Implementation()
+{
+	m_Dead = true;
 }

@@ -16,9 +16,10 @@ void AMechanism::BeginPlay()
 {
 	Super::BeginPlay();
 
-	TArray<UActorComponent*> staticMeshComponents = GetComponentsByClass(UStaticMeshComponent::StaticClass());
-	TArray<UStaticMeshComponent*> meshes;
+	TArray<UActorComponent*> staticMeshComponents;
+	GetComponents(UStaticMeshComponent::StaticClass(), staticMeshComponents);
 
+	TArray<UStaticMeshComponent*> meshes;
 	for (UActorComponent* staticMesh : staticMeshComponents)
 	{
 		if (UStaticMeshComponent* mesh = Cast<UStaticMeshComponent>(staticMesh))

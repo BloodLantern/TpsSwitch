@@ -5,6 +5,7 @@
 #include "GameFramework/PlayerStart.h"
 #include "GameFramework/GameUserSettings.h"
 #include "JojoPlayerController.h"
+#include "Checkpoint.h"
 #include <EnhancedInputSubsystems.h>
 
 APlayerStarPlatinum* ABaseGameMode::CreatePlayer1(FTransform Transform)
@@ -14,10 +15,10 @@ APlayerStarPlatinum* ABaseGameMode::CreatePlayer1(FTransform Transform)
 
 	AddMappingContext(controller);
 
-	APlayerJotaro* jotaro = SpawnJotaro(Transform);
-	controller->Possess(jotaro);
+	PlayerJotaro = SpawnJotaro(Transform);
+	controller->Possess(PlayerJotaro);
 
-	return jotaro->InitializeStarPlatinum();
+	return PlayerJotaro->InitializeStarPlatinum();
 }
 
 void ABaseGameMode::CreatePlayer2(APlayerStarPlatinum* StarPlatinum)
@@ -44,8 +45,19 @@ void ABaseGameMode::BeginPlay()
 	TArray<AActor*> playerStarts;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), APlayerStart::StaticClass(), playerStarts);
 
-	APlayerStarPlatinum* starPlatinum = CreatePlayer1(playerStarts[0]->GetActorTransform());
+	FTransform playerStart = playerStarts[0]->GetActorTransform();
+	APlayerStarPlatinum* starPlatinum = CreatePlayer1(playerStart);
 	CreatePlayer2(starPlatinum);
+
+	LastCheckpoint = playerStart.GetLocation();
+
+	TArray<AActor*> checkpoints;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ACheckpoint::StaticClass(), checkpoints);
+
+	for (AActor* checkpoint : checkpoints)
+	{
+		Cast<ACheckpoint>(checkpoint)->Jotaro = PlayerJotaro;
+	}
 }
 
 void ABaseGameMode::Tick(float DeltaTime)

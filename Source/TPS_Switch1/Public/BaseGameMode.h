@@ -19,8 +19,14 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Player)
 	TArray<UMaterialInterface*> PlayerColors;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Player)
+	APlayerJotaro* PlayerJotaro;
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Time)
 	float TotalGameTime;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Time)
+	FVector LastCheckpoint;
 
 private:
 	APlayerStarPlatinum* CreatePlayer1(FTransform Transform);
