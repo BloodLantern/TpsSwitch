@@ -32,8 +32,9 @@ public:
 	bool InMenus;
 
 private:
-	APlayerStarPlatinum* CreatePlayer1(FTransform Transform);
-	void CreatePlayer2(APlayerStarPlatinum* StarPlatinum);
+	void CreatePlayer1(FTransform Transform);
+	void CreatePlayer2();
+	void CreatePlayers(FTransform Transform);
 
 protected:
 	virtual void BeginPlay() override;

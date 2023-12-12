@@ -8,23 +8,23 @@
 #include "Checkpoint.h"
 #include <EnhancedInputSubsystems.h>
 
-APlayerStarPlatinum* ABaseGameMode::CreatePlayer1(FTransform Transform)
+void ABaseGameMode::CreatePlayer1(FTransform Transform)
 {
+	// Player 1 already exists, so CreatePlayer will return nullptr
 	UGameplayStatics::CreatePlayer(GetWorld(), 0);
+	// Manually get its player controller
 	APlayerController* controller = UGameplayStatics::GetPlayerController(GetWorld(), 0);
 
 	AddMappingContext(controller);
 
 	PlayerJotaro = SpawnJotaro(Transform);
 	controller->Possess(PlayerJotaro);
-
-	return PlayerJotaro->InitializeStarPlatinum();
 }
 
-void ABaseGameMode::CreatePlayer2(APlayerStarPlatinum* StarPlatinum)
+void ABaseGameMode::CreatePlayer2()
 {
 	APlayerController* controller = UGameplayStatics::CreatePlayer(GetWorld(), 1);
-	// If player 2 already exists, get its player controller
+	// If player 2 already exists, get its player controller instead
 	if (!controller)
 		controller = UGameplayStatics::GetPlayerController(GetWorld(), 1);
 
@@ -33,7 +33,13 @@ void ABaseGameMode::CreatePlayer2(APlayerStarPlatinum* StarPlatinum)
 	AJojoPlayerController* jojoController = Cast<AJojoPlayerController>(controller);
 	jojoController->PlayerId = 1;
 
-	controller->Possess(StarPlatinum);
+	controller->Possess(PlayerJotaro->InitializeStarPlatinum());
+}
+
+void ABaseGameMode::CreatePlayers(FTransform Transform)
+{
+	CreatePlayer1(Transform);
+	CreatePlayer2();
 }
 
 void ABaseGameMode::BeginPlay()
@@ -46,8 +52,7 @@ void ABaseGameMode::BeginPlay()
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), APlayerStart::StaticClass(), playerStarts);
 
 	FTransform playerStart = playerStarts[0]->GetActorTransform();
-	APlayerStarPlatinum* starPlatinum = CreatePlayer1(playerStart);
-	CreatePlayer2(starPlatinum);
+	CreatePlayers(playerStart);
 
 	LastCheckpoint = playerStart.GetLocation();
 
@@ -55,9 +60,7 @@ void ABaseGameMode::BeginPlay()
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ACheckpoint::StaticClass(), checkpoints);
 
 	for (AActor* checkpoint : checkpoints)
-	{
 		Cast<ACheckpoint>(checkpoint)->Jotaro = PlayerJotaro;
-	}
 }
 
 void ABaseGameMode::Tick(float DeltaTime)

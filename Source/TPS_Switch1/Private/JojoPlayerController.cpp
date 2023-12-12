@@ -5,6 +5,7 @@
 #include <EnhancedInputComponent.h>
 #include <EnhancedInputSubsystems.h>
 #include <Kismet/GameplayStatics.h>
+#include <Kismet/KismetSystemLibrary.h>
 
 void AJojoPlayerController::BeginPlay()
 {
@@ -43,17 +44,6 @@ void AJojoPlayerController::SetupInputComponent()
 	EnhancedInputComponent->BindAction(AimAction, ETriggerEvent::Triggered, this, &ThisClass::InputAim);
 	EnhancedInputComponent->BindAction(MoveCursorAction, ETriggerEvent::Triggered, this, &ThisClass::InputMoveCursor);
 	EnhancedInputComponent->BindAction(SwapPlayersAction, ETriggerEvent::Triggered, this, &ThisClass::InputSwapPlayers);
-
-	return;
-
-	if (ULocalPlayer* LocalPlayer = Cast<ULocalPlayer>(Player))
-	{
-		if (UEnhancedInputLocalPlayerSubsystem* InputSystem = LocalPlayer->GetSubsystem<UEnhancedInputLocalPlayerSubsystem>())
-		{
-			if (!MappingContext.IsNull())
-				InputSystem->AddMappingContext(MappingContext.LoadSynchronous(), 0);
-		}
-	}
 }
 
 bool AJojoPlayerController::CanUseInput(APlayerBase* PlayerCharacter)
