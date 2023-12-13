@@ -25,7 +25,7 @@ void ACheckpoint::BeginPlay()
 
 void ACheckpoint::OnBeginOverlap_Implementation(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if (!OtherActor->IsA<APlayerJotaro>())
+	if (!OtherActor->IsA<APlayerJotaro>() || m_GameMode->LastCheckpoint == GetActorLocation())
 		return;
 
 	m_GameMode->LastCheckpoint = GetActorLocation();

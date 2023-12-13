@@ -31,7 +31,7 @@ public:
 	UStaticMeshComponent* DoorMesh;
 
 	UFUNCTION(BlueprintCallable)
-	void OnHit(UMaterialInterface* color, ABullet* bullet);
+	bool OnHit(UMaterialInterface* color, ABullet* bullet);
 
 	void MoveDoor(float DeltaTime);
 

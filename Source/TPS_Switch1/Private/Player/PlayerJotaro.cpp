@@ -34,6 +34,8 @@ void APlayerJotaro::BeginPlay()
 
 void APlayerJotaro::Tick(float DeltaTime)
 {
+	Super::Tick(DeltaTime);
+
 	// Always move forward
 	if (m_Moving)
 		AddMovementInput(UKismetMathLibrary::GetForwardVector(GetControlRotation()), 1.f);

@@ -27,11 +27,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
 	bool IsOnPlatform;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Animation)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Animation)
 	bool ShouldJump;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Animation)
-	bool ShouldSlide;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Health)
 	float MaxHealth = 3.f;

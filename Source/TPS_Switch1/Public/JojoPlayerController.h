@@ -37,9 +37,6 @@ public:
 	UInputAction* JumpAction;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
-	UInputAction* SlideAction;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
 	UInputAction* AimAction;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
@@ -63,8 +60,6 @@ private:
 	void InputMovement(const FInputActionValue& Value);
 	void InputJumpBegin();
 	void InputJumpEnd();
-	void InputSlideBegin();
-	void InputSlideEnd();
 	void InputAim();
 	void InputMoveCursor(const FInputActionValue& Value);
 	void InputSwapPlayers();

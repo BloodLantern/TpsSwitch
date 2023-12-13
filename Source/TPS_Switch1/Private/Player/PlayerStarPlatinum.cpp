@@ -31,11 +31,10 @@ void APlayerStarPlatinum::OnSpawned_Implementation(APlayerJotaro* JotaroInstance
 	Jotaro = JotaroInstance;
 }
 
-void APlayerStarPlatinum::Aim_Implementation()
+void APlayerStarPlatinum::ToggleAim_Implementation()
 {
 	UParticleSystemComponent* OraAura = GetComponentByClass<UParticleSystemComponent>();
 
-	ShouldPunch = !ShouldPunch;
 	ShouldAim = !ShouldAim;
 
 	if (OraAura)
@@ -56,4 +55,7 @@ void APlayerStarPlatinum::SwapPlayers_Implementation()
 
 	Jotaro->ApplyOutline();
 	ApplyOutline();
+
+	if (ShouldAim)
+		ToggleAim();
 }

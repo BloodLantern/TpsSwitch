@@ -39,8 +39,6 @@ void AJojoPlayerController::SetupInputComponent()
 	EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ThisClass::InputMovement);
 	EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Triggered, this, &ThisClass::InputJumpBegin);
 	EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ThisClass::InputJumpEnd);
-	EnhancedInputComponent->BindAction(SlideAction, ETriggerEvent::Triggered, this, &ThisClass::InputSlideBegin);
-	EnhancedInputComponent->BindAction(SlideAction, ETriggerEvent::Completed, this, &ThisClass::InputSlideEnd);
 	EnhancedInputComponent->BindAction(AimAction, ETriggerEvent::Triggered, this, &ThisClass::InputAim);
 	EnhancedInputComponent->BindAction(MoveCursorAction, ETriggerEvent::Triggered, this, &ThisClass::InputMoveCursor);
 	EnhancedInputComponent->BindAction(SwapPlayersAction, ETriggerEvent::Triggered, this, &ThisClass::InputSwapPlayers);
@@ -69,22 +67,10 @@ void AJojoPlayerController::InputJumpEnd()
 		Jotaro->ShouldJump = false;
 }
 
-void AJojoPlayerController::InputSlideBegin()
-{
-	if (CanUseInput(Jotaro))
-		Jotaro->ShouldSlide = true;
-}
-
-void AJojoPlayerController::InputSlideEnd()
-{
-	if (CanUseInput(Jotaro))
-		Jotaro->ShouldSlide = false;
-}
-
 void AJojoPlayerController::InputAim()
 {
 	if (CanUseInput(StarPlatinum))
-		StarPlatinum->Aim();
+		StarPlatinum->ToggleAim();
 }
 
 void AJojoPlayerController::InputMoveCursor(const FInputActionValue& Value)

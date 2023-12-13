@@ -28,7 +28,7 @@ void ASwitch::Tick(float DeltaTime)
 	}
 }
 
-void ASwitch::OnHit(UMaterialInterface* color, ABullet* bullet)
+bool ASwitch::OnHit(UMaterialInterface* color, ABullet* bullet)
 {
 	if (bullet->EntityData.Color == EntityData.Color)
 	{
@@ -36,8 +36,12 @@ void ASwitch::OnHit(UMaterialInterface* color, ABullet* bullet)
 		{
 			IsOn = true;
 			Mesh->SetMaterial(0, color);
+
+			return true;
 		}
 	}
+
+	return false;
 }
 
 void ASwitch::MoveDoor(float DeltaTime)

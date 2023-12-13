@@ -22,13 +22,13 @@ void AObstacle::BeginPlay()
     m_TorqueCoefficient = 50000;
     m_RandomPrecision = 100;
     TumbleRotation = GenerateTumbleRotation();
-    Tumble();
+    //Tumble();
 }
 
 void AObstacle::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
-    ApplyFallSpeed();
+    //ApplyFallSpeed();
     FocusPlayer();
 }
 
@@ -68,10 +68,7 @@ FRotator AObstacle::GenerateTumbleRotation()
 
 void AObstacle::ApplyFallSpeed()
 {
-    if (Speed == 1.0f)
-    {
-    }
-    else if (Speed < 1.0f)
+    if (Speed < 1.0f)
     {
         if (Mesh)
         {
@@ -91,10 +88,10 @@ void AObstacle::ApplyFallSpeed()
 
 void AObstacle::FocusPlayer()
 {
-    FVector DirectionToPlayer = (GetWorld()->GetFirstPlayerController()->GetPawn()->GetActorLocation() - GetActorLocation().GetSafeNormal());
+    FVector DirectionToPlayer = (GetWorld()->GetFirstPlayerController()->GetPawn()->GetActorLocation() - GetActorLocation()).GetSafeNormal();
     float DistanceToPlayer = FVector::Dist(GetWorld()->GetFirstPlayerController()->GetPawn()->GetActorLocation(), GetActorLocation());
     float MaxForce = 1000.0f;
-    float ForceMagnitude = FMath::Clamp(MaxForce / DistanceToPlayer, 0.0f, MaxForce);
+    float ForceMagnitude = FMath::Clamp(MaxForce, 0.0f, MaxForce);
     FVector Force = DirectionToPlayer * ForceMagnitude;
     Mesh->AddForce(Force, NAME_None, true);
 }

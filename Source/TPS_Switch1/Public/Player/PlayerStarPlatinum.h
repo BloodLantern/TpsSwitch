@@ -30,9 +30,6 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	bool ShouldAim = false;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	bool ShouldPunch = true;
-
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = StarPlatinum)
 	FVector JotaroOffset = FVector(-50.0, -50.0, 50.0);
 
@@ -53,8 +50,8 @@ public:
 	virtual void OnSpawned_Implementation(APlayerJotaro* JotaroInstance);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void Aim();
-	void Aim_Implementation();
+	void ToggleAim();
+	void ToggleAim_Implementation();
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void MoveCursor(FVector2D Value);
