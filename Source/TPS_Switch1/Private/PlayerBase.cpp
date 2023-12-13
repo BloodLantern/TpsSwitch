@@ -12,6 +12,11 @@ APlayerBase::APlayerBase()
     PrimaryActorTick.bCanEverTick = true;
 }
 
+void APlayerBase::ApplyOutline()
+{
+    GetMesh()->SetOverlayMaterial(PlayerData.Outline);
+}
+
 // Called when the game starts or when spawned
 void APlayerBase::BeginPlay()
 {

@@ -53,6 +53,7 @@ void ABaseGameMode::BeginPlay()
 
 	FTransform playerStart = playerStarts[0]->GetActorTransform();
 	CreatePlayers(playerStart);
+	SetupPlayerOutlines();
 
 	LastCheckpoint = playerStart.GetLocation();
 

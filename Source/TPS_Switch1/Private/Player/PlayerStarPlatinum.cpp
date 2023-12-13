@@ -53,4 +53,7 @@ void APlayerStarPlatinum::SwapPlayers_Implementation()
 	FPlayerData thisData = PlayerData;
 	PlayerData = Jotaro->PlayerData;
 	Jotaro->PlayerData = thisData;
+
+	Jotaro->ApplyOutline();
+	ApplyOutline();
 }

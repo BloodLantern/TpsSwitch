@@ -47,6 +47,9 @@ protected:
 	UFUNCTION(BlueprintImplementableEvent)
 	void AddMappingContext(APlayerController* PlayerController);
 
+	UFUNCTION(BlueprintImplementableEvent)
+	void SetupPlayerOutlines();
+
 public:
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	UMaterialInterface* GetPlayerColor(int PlayerId) const;
