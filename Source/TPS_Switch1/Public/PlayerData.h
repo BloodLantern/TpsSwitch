@@ -19,4 +19,7 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = EntityData)
 	int PlayerId;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = EntityData)
+	UMaterialInterface* Outline;
 };
